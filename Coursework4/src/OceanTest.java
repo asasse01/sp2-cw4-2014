@@ -15,6 +15,23 @@ public class OceanTest {
 	public void testPlaceAllShipsRandomly() {
 		fail("Not yet implemented");
 
+		Ocean ocean = new Ocean();
+		int emptySeaCount = (ocean.ships.length)*(ocean.ships[0].length); 
+		
+		// tests number of empty sea units in a 10 x 10 board
+		assertEquals(100, emptySeaCount);
+		
+		ocean.placeAllShipsRandomly();
+		for(int i = 0; i < ocean.ships.length; i++) {
+			for(int j = 0; j < ocean.ships.length; j++) {
+				if (ocean.ships[i][j] != e) {
+					emptySeaCount--;
+				}
+			}
+		}
+		
+		// tests number once fleet discounted
+		assertEquals(80, emptySeaCount);
 		
 	}
 
