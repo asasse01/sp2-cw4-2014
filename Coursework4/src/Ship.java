@@ -86,8 +86,12 @@ public class Ship {
     }
 
     public boolean isSunk() {
-        // TODO write method
-        boolean sunk = false;
+        boolean sunk = true;
+        for (int i = 0; i < this.length; i++) {
+        	if(!this.hit[i]) {
+        		sunk = false;
+        	}
+        }
         return sunk;
     }
 
