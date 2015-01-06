@@ -25,6 +25,7 @@ public class ShipTest {
         assertEquals(false, e.okToPlaceShipAt(10, 11, true, ocean));
         b.placeShipAt(3, 4, true, ocean);
         assertEquals(false, s.okToPlaceShipAt(3, 6, true, ocean));
+        assertEquals(false, s.okToPlaceShipAt(4, 5, true, ocean));
     }
 
     @Test
