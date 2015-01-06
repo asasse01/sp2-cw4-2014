@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 
 public class OceanTest {
 	
@@ -13,7 +14,6 @@ public class OceanTest {
 
 	@Test
 	public void testPlaceAllShipsRandomly() {
-		fail("Not yet implemented");
 
 		Ocean ocean = new Ocean();
 		int emptySeaCount = (ocean.ships.length)*(ocean.ships[0].length); 
@@ -37,7 +37,6 @@ public class OceanTest {
 
 	@Test
 	public void testIsOccupied() {
-		fail("Not yet implemented");
 
 		Ocean ocean = new Ocean();
         assertEquals(false, ocean.isOccupied(0, 3));
@@ -52,14 +51,13 @@ public class OceanTest {
 
 	@Test
 	public void testShootAt() {
-		fail("Not yet implemented");
 		
 		Ocean ocean = new Ocean();
 		
         assertEquals(0, ocean.getHitCount());
         assertEquals(0, ocean.getShipsSunk());
 
-		c.placeShipAt(3, 2, false, ocean);
+		d.placeShipAt(3, 2, false, ocean);
 		ocean.shootAt(3, 2);
         assertEquals(1, ocean.getHitCount());
         
