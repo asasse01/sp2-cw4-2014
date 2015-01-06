@@ -95,11 +95,13 @@ public class Ship {
         boolean shot = false;
         if (!this.isSunk()) {
         	for (int i = 0; i < this.length; i++) {
-        		if (this.isHorizontal() && this.bowRow == row) {
-            		if (this.bowColumn+i == column) {
-            			this.hit[i] = true;
-            			shot = true;
-            		}
+        		if (this.isHorizontal()) {
+	        		if (this.bowRow == row) {
+	            		if (this.bowColumn+i == column) {
+	            			this.hit[i] = true;
+	            			shot = true;
+	            		}
+	        		}
             	} else if (this.bowColumn == column) {
             		if (this.bowRow+i == row) {
             			this.hit[i] = true;
@@ -115,7 +117,7 @@ public class Ship {
     public boolean isSunk() {
         boolean sunk = true;
         for (int i = 0; i < this.length; i++) {
-        	if(!this.hit[i]) {
+        	if(!(this.hit[i])) {
         		sunk = false;
         	}
         }
