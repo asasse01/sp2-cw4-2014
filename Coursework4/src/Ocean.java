@@ -59,8 +59,11 @@ public class Ocean {
 
     boolean isOccupied(int row, int column) {
     	boolean occupied = false;
-    	if (!(ships[row][column] instanceof EmptySea)) {
-    		occupied = true;
+    	if (!(row < 0 || column < 0 || row > MAX || column > MAX)) {
+    		// if the area is not off the board - for checking ship perimeter in okToPlaceAt
+	    	if (!(ships[row][column] instanceof EmptySea)) {
+	    		occupied = true;
+	    	}
     	}
     	
     	return occupied;
