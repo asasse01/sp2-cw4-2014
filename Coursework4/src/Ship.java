@@ -13,7 +13,7 @@ public class Ship {
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
         boolean ok = true;
 //    	TODO refactor loops
-        if(this.isHorizontal()) {
+        if(horizontal) {
             for(int j = column-1; j < this.length+1; j++) {
             	// checks overlap with any other ship & surrounding space
                 if (ocean.isOccupied(row, j) || ocean.isOccupied(row-1, j) || ocean.isOccupied(row+1, j)) {
@@ -50,7 +50,18 @@ public class Ship {
     }
 
     public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+        setBowRow(row);
+        setBowColumn(column);
+        setHorizontal(horizontal);
 
+        if (okToPlaceShipAt(row, column, horizontal, ocean)) {
+	        
+            for(int i = 0; i < this.length; i++) {
+            	if(this.isHorizontal()) {
+	            	ocean.ships[row][column+i] = this;
+	            } else ocean.ships[row+i][column] = this;
+	        }
+        }
     }
 
     public boolean shootAt(int row, int column) {
