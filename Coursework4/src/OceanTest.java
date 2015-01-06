@@ -53,6 +53,23 @@ public class OceanTest {
 	@Test
 	public void testShootAt() {
 		fail("Not yet implemented");
+		
+		Ocean ocean = new Ocean();
+		
+        assertEquals(0, ocean.getHitCount());
+        assertEquals(0, ocean.getShipsSunk());
+
+		c.placeShipAt(3, 2, false, ocean);
+		ocean.shootAt(3, 2);
+        assertEquals(1, ocean.getHitCount());
+        
+		ocean.shootAt(4, 2);
+        assertEquals(2, ocean.getHitCount());
+        assertEquals(1, ocean.getShipsSunk());
+
+
+		
+
 	}
 	
 	
