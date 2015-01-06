@@ -10,14 +10,47 @@ public class Ship {
     String shipType;
     boolean[] hit;
 
-    private boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-        // TODO write method
-        boolean ok = false;
+    public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+        boolean ok = true;
+//    	TODO refactor loops
+        if(this.isHorizontal()) {
+            for(int j = column-1; j < this.length+1; j++) {
+            	// checks overlap with any other ship & surrounding space
+                if (ocean.isOccupied(row, j) || ocean.isOccupied(row-1, j) || ocean.isOccupied(row+1, j)) {
+                    ok = false;
+                }
+	            // checks whether ship goes off board - vertically
+	            if (row < 0 || row > ocean.getShipArray()[column].length) {
+	            	ok = false;
+	            }
+	            // checks whether ship goes off board - horizontally
+	            // accounts for space at bow and stern
+	            if (j < -1 || j > ocean.getShipArray().length+1) {
+	            	ok = false;
+	            }
+            }
+        } else {
+        	for(int i = row-1; i < this.length+1; i++) {
+        		// checks overlap with any other ship & surrounding space
+	            if (ocean.isOccupied(i, column) || ocean.isOccupied(i, column-1) || ocean.isOccupied(i, column+1))  {
+	                ok = false;
+	            }
+	            // checks whether ship goes off board - vertically
+	            // accounts for space at bow and stern
+	            if (i < -1 || i > ocean.getShipArray()[column].length+1) {
+	            	ok = false;
+	            }
+	            // checks whether ship goes off board - horizontally
+	            if (column < 0 || column > ocean.getShipArray().length) {
+	            	ok = false;
+	            }
+        	}
+        }
         return ok;
     }
 
-    private void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-        // TODO write method
+    public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+
     }
 
     public boolean shootAt(int row, int column) {
