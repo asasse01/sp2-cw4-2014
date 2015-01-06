@@ -65,8 +65,23 @@ public class Ship {
     }
 
     public boolean shootAt(int row, int column) {
-        // TODO write method
         boolean shot = false;
+        if (!this.isSunk()) {
+        	for (int i = 0; i < this.length; i++) {
+        		if (this.isHorizontal() && this.bowRow == row) {
+            		if (this.bowColumn+i == column) {
+            			this.hit[i] = true;
+            			shot = true;
+            		}
+            	} else if (this.bowColumn == column) {
+            		if (this.bowRow+i == row) {
+            			this.hit[i] = true;
+            			shot = true;
+            		}
+            	}
+        	}
+        }
+
         return shot;
     }
 
