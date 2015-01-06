@@ -21,39 +21,39 @@ public class Ocean {
 
     }
 
-    private void placeAllShipsRandomly() {
+    void placeAllShipsRandomly() {
         // TODO write method
     }
 
-    private boolean isOccupied(int row, int column) {
+    boolean isOccupied(int row, int column) {
         // TODO write method
     }
 
-    private boolean shootAt(int row, int column) {
+    boolean shootAt(int row, int column) {
         // TODO write method
     }
 
-    private void print() {
+    void print() {
         // TODO write method
     }
 
-    public boolean isGameOver() {
+    boolean isGameOver() {
         return (shipsSunk == 10);
     }
 
-    public int getShotsFired() {
+    int getShotsFired() {
         return shotsFired;
     }
 
-    public int getHitCount() {
+    int getHitCount() {
         return hitCount;
     }
 
-    public int getShipsSunk() {
+    int getShipsSunk() {
         return shipsSunk;
     }
 
-    public Ship[][] getShipArray() {
+    Ship[][] getShipArray() {
         return ships;
     }
 
