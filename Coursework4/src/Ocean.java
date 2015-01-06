@@ -7,7 +7,7 @@ public class Ocean {
     Ship[][] ships = new Ship[10][10];
     int shotsFired;
     int hitCount;
-    int shipsSunk;
+    int shipsSunk = 0;
     final int MAX = ships.length; // ocean border. Assumes board is square
     Random rand = new Random();
 
@@ -70,7 +70,19 @@ public class Ocean {
     }
 
     boolean shootAt(int row, int column) {
-        // TODO write method
+    	boolean shot = false;
+    	Ship target;
+    	shotsFired++;
+        if (this.isOccupied(row, column) && !(this.ships[row][column].isSunk())) {
+        	target = ships[row][column];
+        	shot = target.shootAt(row, column);
+        	hitCount++;
+        	if(this.ships[row][column].isSunk()) {
+            	shipsSunk++;
+            }
+        } 
+        
+        return shot;
     }
 
     void print() {
