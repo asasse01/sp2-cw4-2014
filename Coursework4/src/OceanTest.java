@@ -2,8 +2,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
 public class OceanTest {
 	
     Battleship b = new Battleship();
@@ -24,7 +22,7 @@ public class OceanTest {
 		ocean.placeAllShipsRandomly();
 		for(int i = 0; i < ocean.ships.length; i++) {
 			for(int j = 0; j < ocean.ships.length; j++) {
-				if (ocean.ships[i][j] != e) {
+				if (!(ocean.ships[i][j] instanceof EmptySea)) {
 					emptySeaCount--;
 				}
 			}
