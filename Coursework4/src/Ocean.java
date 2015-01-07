@@ -23,7 +23,6 @@ public class Ocean {
                 ships[i][j] = e;
             }
         }
-
     }
 
     void placeAllShipsRandomly() {
@@ -86,7 +85,14 @@ public class Ocean {
     }
 
     void print() {
-        // TODO write method
+    	System.out.println("  0 1 2 3 4 5 6 7 8 9");
+    	for(int i = 0; i < MAX; i++) {
+    		System.out.print(i);
+			for(int j = 0; j < MAX; j++) {
+				System.out.print( " " + ships[i][j].toString());
+			}
+			System.out.println();
+		}
     }
 
     boolean isGameOver() {
