@@ -7,19 +7,25 @@ public class BattleshipGame {
 
     public static void main(String[] args) {
         
+        Scanner in = new Scanner(System.in);
+        
+        runGame();
+        requestReplay();
+        
+        in.close();
+       
+    }
+    
+    void runGame() {
+        
         Ocean ocean = new Ocean();
         ocean.placeAllShipsRandomly();
         
         boolean shot = false;
-        
-        Scanner in = new Scanner(System.in);
         int x;
         int y;
-        String replayGame;
-        boolean validResponse = true;
-
         
-        System.out.println("Welcome to the Battleship Game.");
+         System.out.println("Welcome to the Battleship Game.");
         
         do {
             System.out.println("Please enter your shots, giving coordinates x and y on a new line");
@@ -42,6 +48,12 @@ public class BattleshipGame {
         System.out.println("Hits: " + ocean.getHitCount();
         System.out.println("Ships sunk: " + ocean.getShipsSunk();
         
+    }
+    
+    void requestReplay() {
+        String replayGame;
+        boolean validResponse = true;
+
         do {
             System.out.println("Would you like to play again? Y/N");
             replayGame = in.Next();
@@ -56,6 +68,5 @@ public class BattleshipGame {
                 validResponse = false;
             }
         } while (!(validResponse));
-
     }
 }
