@@ -123,6 +123,19 @@ public class Ship {
         }
         return sunk;
     }
+    
+    public @Override String toString() {
+    	String string = ".";
+    	if (this.isSunk()) {
+			string = "x";
+		} else for(int i = 0; i < length; i++) {
+    		 if (this.hit[i]) {
+    			string = "S";
+    		}
+    	}
+    	
+    	return string;
+    }
 
     public int getBowRow() {
         return bowRow;

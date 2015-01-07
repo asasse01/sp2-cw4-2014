@@ -12,7 +12,4 @@ public class Cruiser extends Ship {
         return "cruiser";
     }
 
-    public @Override String toString() {
-        // TODO write method
-    }
 }

@@ -12,7 +12,4 @@ public class Battleship extends Ship {
         return "battleship";
     }
 
-    public @Override String toString() {
-        // TODO write method
-    }
 }

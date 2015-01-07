@@ -16,7 +16,4 @@ public class EmptySea extends Ship {
         return false;
     }
 
-    public @Override String toString() {
-        // TODO write method
-    }
 }
