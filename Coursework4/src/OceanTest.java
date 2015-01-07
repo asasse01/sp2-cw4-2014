@@ -27,8 +27,9 @@ public class OceanTest {
 				}
 			}
 		}
-		
+
 		// tests number once fleet discounted
+		// FIXME sometimes failing with 81 or 82 returned
 		assertEquals(80, emptySeaCount);
 		
 	}
@@ -62,9 +63,6 @@ public class OceanTest {
 		ocean.shootAt(4, 2);
         assertEquals(2, ocean.getHitCount());
         assertEquals(1, ocean.getShipsSunk());
-
-
-		
 
 	}
 	
