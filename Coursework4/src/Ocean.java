@@ -3,12 +3,14 @@ import java.util.Random;
 /**
  * Created by abby on 22/12/14.
  */
+
+
 public class Ocean {
-    Ship[][] ships = new Ship[10][10];
+	private static final int BOARDLENGTH = 10; // ocean length. Assumes board is square
+	Ship[][] ships = new Ship[BOARDLENGTH][BOARDLENGTH];
     int shotsFired;
     int hitCount;
     int shipsSunk = 0;
-    final int MAX = ships.length; // ocean border. Assumes board is square
     Random rand = new Random();
 
 
@@ -18,8 +20,8 @@ public class Ocean {
         shipsSunk = 0;
         EmptySea e = new EmptySea();
 
-        for(int i = 0; i < MAX; i++) {
-            for(int j = 0; j < MAX; j++) {
+        for(int i = 0; i < BOARDLENGTH; i++) {
+            for(int j = 0; j < BOARDLENGTH; j++) {
                 ships[i][j] = e;
             }
         }
@@ -47,8 +49,8 @@ public class Ocean {
     		horizontal = rand.nextBoolean();
     		
     		do {
-    			row = rand.nextInt(MAX);
-    			column = rand.nextInt(MAX);
+    			row = rand.nextInt(BOARDLENGTH);
+    			column = rand.nextInt(BOARDLENGTH);
     			
     		} while (!(ship.okToPlaceShipAt(row, column, horizontal, this)));
     		
@@ -58,7 +60,7 @@ public class Ocean {
 
     boolean isOccupied(int row, int column) {
     	boolean occupied = false;
-    	if (!(row < 0 || column < 0 || row >= MAX || column >= MAX)) {
+    	if (!(row < 0 || column < 0 || row >= BOARDLENGTH || column >= BOARDLENGTH)) {
     		// if the area is not off the board - for checking ship perimeter in okToPlaceAt
 	    	if (!(ships[row][column] instanceof EmptySea)) {
 	    		occupied = true;
@@ -86,9 +88,9 @@ public class Ocean {
 
     void print() {
     	System.out.println("  0 1 2 3 4 5 6 7 8 9");
-    	for(int i = 0; i < MAX; i++) {
+    	for(int i = 0; i < BOARDLENGTH; i++) {
     		System.out.print(i);
-			for(int j = 0; j < MAX; j++) {
+			for(int j = 0; j < BOARDLENGTH; j++) {
 				System.out.print( " " + ships[i][j].toString());
 			}
 			System.out.println();
