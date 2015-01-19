@@ -18,6 +18,11 @@ public class Ocean {
         shotsFired = 0;
         hitCount = 0;
         shipsSunk = 0;
+        ships = fillWithEmptySea(ships);
+
+    }
+    
+    Ship[][] fillWithEmptySea(Ship[][] ships) {
         EmptySea e = new EmptySea();
 
         for(int i = 0; i < BOARDLENGTH; i++) {
@@ -25,6 +30,9 @@ public class Ocean {
                 ships[i][j] = e;
             }
         }
+        
+        return ships;
+    	
     }
 
     void placeAllShipsRandomly() {
@@ -32,18 +40,8 @@ public class Ocean {
 		int column;
 		boolean horizontal;
 
-		
-    	Ship[] fleet = new Ship[10];
-    	fleet[0] = new Battleship();
-    	fleet[1] = new Cruiser();
-    	fleet[2] = new Cruiser();
-    	fleet[3] = new Destroyer();
-    	fleet[4] = new Destroyer();
-    	fleet[5] = new Destroyer();
-    	fleet[6] = new Submarine();
-    	fleet[7] = new Submarine();
-    	fleet[8] = new Submarine();
-    	fleet[9] = new Submarine();
+		Ship[] fleet = new Ship[10];
+		fleet = createFleet(fleet);
 
     	for(Ship ship : fleet) {
     		horizontal = rand.nextBoolean();
@@ -56,6 +54,20 @@ public class Ocean {
     		
     		ship.placeShipAt(row, column, horizontal, this);
     	}
+    }
+    
+    Ship[] createFleet(Ship[] fleet) {
+    	fleet[0] = new Battleship();
+    	fleet[1] = new Cruiser();
+    	fleet[2] = new Cruiser();
+    	fleet[3] = new Destroyer();
+    	fleet[4] = new Destroyer();
+    	fleet[5] = new Destroyer();
+    	fleet[6] = new Submarine();
+    	fleet[7] = new Submarine();
+    	fleet[8] = new Submarine();
+    	fleet[9] = new Submarine();
+    	return fleet;
     }
 
     boolean isOccupied(int row, int column) {
