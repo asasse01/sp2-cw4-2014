@@ -45,10 +45,12 @@ public class Ocean {
 
     	for(Ship ship : fleet) {
     		horizontal = rand.nextBoolean();
+    		// generates random horizontal value
     		
     		do {
     			row = rand.nextInt(BOARDLENGTH);
     			column = rand.nextInt(BOARDLENGTH);
+        		// generates random coordinate values
     			
     		} while (!(ship.okToPlaceShipAt(row, column, horizontal, this)));
     		
@@ -100,10 +102,13 @@ public class Ocean {
 
     void print() {
     	System.out.println("  0 1 2 3 4 5 6 7 8 9");
+    	// prints column numbers
     	for(int i = 0; i < BOARDLENGTH; i++) {
     		System.out.print(i);
+    		// prints row numbers
 			for(int j = 0; j < BOARDLENGTH; j++) {
 				System.out.print( " " + ships[i][j].toString());
+				// prints ship string
 			}
 			System.out.println();
 		}
