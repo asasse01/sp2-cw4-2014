@@ -18,7 +18,6 @@
     }
     
     static void runGame(Ocean ocean) {
-    	Scanner in = new Scanner(System.in);
         
         boolean shot = false;
         int x;
@@ -29,10 +28,9 @@
         
         do {
             
-            System.out.println("Please enter your shots, giving coordinates x and y on a new line");
-            x = in.nextInt();
-            y = in.nextInt();
-            
+            int coord[] = requestInputCoord();
+            x = coord[0];
+            y = coord[1];
             shot = ocean.shootAt(x, y);
             if(shot){
                 if(ocean.ships[x][y].isSunk()){// TODO create Ocean method
@@ -44,7 +42,22 @@
         
         System.out.println("Game completed. Final Score (shots fired): " + ocean.getShotsFired());
         
+    }
+    
+    static int[] requestInputCoord() {
+    	Scanner in = new Scanner(System.in);
+    	int coord[] = new int[2];
+    	
+        System.out.println("Please enter your shots, giving coordinates in the format \"x, y\"");
+        // TODO error checking
+        String input0 = in.nextLine();
+        String input[] = input0.split("\\,\\s+");
+        coord[0] = Integer.parseInt(input[0]);
+        coord[1] = Integer.parseInt(input[1]);
         in.close();
+        
+        return coord;
+
     }
     
     static void requestReplay(Ocean ocean) {
