@@ -4,7 +4,8 @@
  
  import java.util.Scanner;
  public class BattleshipGame {
-
+	 
+	public static final Scanner IN = new Scanner(System.in);
 
     public static void main(String[] args) {        
         
@@ -14,6 +15,7 @@
         runGame(ocean);
         requestReplay(ocean);
         
+        IN.close();
        
     }
     
@@ -45,30 +47,26 @@
     }
     
     static int[] requestInputCoord() {
-    	Scanner in = new Scanner(System.in);
     	int coord[] = new int[2];
     	
-        System.out.println("Please enter your shots, giving coordinates in the format \"x, y\"");
+        System.out.println("Please enter your shot, giving coordinates in the format \"x, y\"");
         // TODO error checking
-        String input0 = in.nextLine();
-        String input[] = input0.split("\\,\\s+");
+    	String input[] = IN.nextLine().split("\\,\\s?+");
         coord[0] = Integer.parseInt(input[0]);
         coord[1] = Integer.parseInt(input[1]);
-        in.close();
-        
+                
         return coord;
 
     }
     
     static void requestReplay(Ocean ocean) {
-    	Scanner in = new Scanner(System.in);
     	
         String replayGame;
         boolean validResponse = true;
 
         do {
             System.out.println("Would you like to play again? Y/N");
-            replayGame = in.next();
+            replayGame = IN.next();
             if(replayGame == "Y") { //switch statement
                 validResponse = true;
                 runGame(ocean);
@@ -81,6 +79,5 @@
             }
         } while (!(validResponse));
         
-        in.close();
     }
 }
