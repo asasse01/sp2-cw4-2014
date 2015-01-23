@@ -66,18 +66,45 @@
 
         do {
             System.out.println("Would you like to play again? Y/N");
-            replayGame = IN.next();
-            if(replayGame == "Y") { //switch statement
-                validResponse = true;
-                runGame(ocean);
-            } else if(replayGame == "N") {
-                validResponse = true;
-                break;
-            } else {
-                System.out.println("Invalid response.");
+            replayGame = IN.next().toUpperCase();
+            switch(replayGame) {
+            case("Y"):
+            	validResponse = true;
+            	runGame(ocean);
+            case("N"):
+            	validResponse = true;
+            	System.out.println("Thanks for playing Battleship!");
+            	break;
+        	default:
+        		System.out.println("Invalid response. Please enter \"Y\" or \"N\".");
                 validResponse = false;
             }
         } while (!(validResponse));
+        
+    }
+    
+static void testRunGame(Ocean ocean) {
+        
+        boolean shot = false;
+        
+         System.out.println("Welcome to the Battleship Game TEST.");
+         ocean.print();
+        
+        do {
+        	for(int i = 0; i < 10; i++) {
+        		for(int j = 0; j < 10; j++) {
+		            shot = ocean.shootAt(i, j);
+		            if(shot){
+		                if(ocean.ships[i][j].isSunk()){// TODO create Ocean method
+		                    System.out.println("You just sunk a "+ ocean.ships[i][j].getShipType());
+		                } else System.out.println("Hit");
+		            } else System.out.println("Miss");
+		            //ocean.print(); 
+        		}
+        	}
+        } while (!(ocean.isGameOver()));
+        ocean.print();
+        System.out.println("Game completed. Final Score (shots fired): " + ocean.getShotsFired());
         
     }
 }
