@@ -30,7 +30,7 @@
         
         do {
             
-            int coord[] = requestInputCoord();
+            int coord[] = formatInput(requestInput());
             x = coord[0];
             y = coord[1];
             shot = ocean.shootAt(x, y);
@@ -46,8 +46,7 @@
         
     }
     
-    static int[] requestInputCoord() {
-    	int coord[] = new int[2];
+    static String requestInput() {
         boolean validInput = false;
         String correctFormat = "\\d{1}\\,\\s*\\d{1}";
         String input;
@@ -56,20 +55,23 @@
 	        System.out.println("Please enter your shot, giving coordinates 0-9 in the format \"x, y\"");
 	        input = IN.nextLine();
 	        
-	        if (input == correctFormat) {
-	            validInput = true;
-	        } else {
-	            System.out.println("Sorry, wrong format.");
-	        } 
-        } while (!validInput);
+	        if(!(input.matches(correctFormat))) {
+	        	System.out.println("Sorry, wrong format or coordinates outside of board.");
+	        } else validInput = true;
+        } while (!(validInput));
     	
+        return input;
+        
+    }
+    
+    static int[] formatInput(String input) {
+    	int coord[] = new int[2];
         String inputSplit[] = input.split("\\,\\s*");
         coord[0] = Integer.parseInt(inputSplit[0]);
-        coord[1] = Integer.parseInt(inputSplit[1]);
-                
+        coord[1] = Integer.parseInt(inputSplit[1]); 
         return coord;
-
     }
+
     
     static void requestReplay(Ocean ocean) {
     	
