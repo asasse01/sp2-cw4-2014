@@ -35,8 +35,8 @@
             y = coord[1];
             shot = ocean.shootAt(x, y);
             if(shot){
-                if(ocean.ships[x][y].isSunk()){// TODO create Ocean method
-                    System.out.println("You just sunk a "+ ocean.ships[x][y].getShipType());
+                if(ocean.getShipAt(x, y).isSunk()){
+                    System.out.println("You just sunk a "+ ocean.getShipAt(x, y).getShipType());
                 } else System.out.println("Hit");
             } else System.out.println("Miss");
             ocean.print();    
@@ -95,8 +95,8 @@ static void testRunGame(Ocean ocean) {
         		for(int j = 0; j < 10; j++) {
 		            shot = ocean.shootAt(i, j);
 		            if(shot){
-		                if(ocean.ships[i][j].isSunk()){// TODO create Ocean method
-		                    System.out.println("You just sunk a "+ ocean.ships[i][j].getShipType());
+		                if(ocean.getShipAt(i, j).isSunk()){
+		                    System.out.println("You just sunk a "+ ocean.getShipAt(i, j).getShipType());
 		                } else System.out.println("Hit");
 		            } else System.out.println("Miss");
 		            //ocean.print(); 

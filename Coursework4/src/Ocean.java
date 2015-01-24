@@ -133,6 +133,10 @@ public class Ocean {
     Ship[][] getShipArray() {
         return ships;
     }
+    
+    Ship getShipAt(int x, int y) {
+        return ships[x][y];
+    }
 
 
 }
