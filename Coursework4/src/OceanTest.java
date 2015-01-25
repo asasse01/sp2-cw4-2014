@@ -1,3 +1,7 @@
+/**
+ * @author Abby Sassel
+ * @since 22/12/14.
+ */
 import static org.junit.Assert.*;
 
 import org.junit.Test;

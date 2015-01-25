@@ -1,5 +1,6 @@
 /**
- * Created by abby on 22/12/14.
+ * @author Abby Sassel
+ * @since 22/12/14.
  */
 public class Submarine extends Ship {
 

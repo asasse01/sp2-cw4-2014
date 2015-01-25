@@ -1,5 +1,6 @@
 /**
- * Created by abby on 22/12/14.
+ * @author Abby Sassel
+ * @since 22/12/14.
  */
  
  import java.util.Scanner;
@@ -19,6 +20,10 @@
        
     }
     
+    /**
+     * runs Battleship game, recording hit and sunk ships until game completion
+     * @param ocean in which to run the game
+     */
     static void runGame(Ocean ocean) {
         
         boolean shot = false;
@@ -46,6 +51,10 @@
         
     }
     
+    /**
+     * requests and checks user input coordinates 
+     * @return user input to pass to Battleship game
+     */
     static String requestInput() {
         boolean validInput = false;
         String correctFormat = "\\d{1}\\,\\s*\\d{1}";
@@ -64,6 +73,11 @@
         
     }
     
+    /**
+     * parses user input String into array for use in Battleship game
+     * @param input user input String to convert to array
+     * @return array coordinates or use in Battleship game
+     */
     static int[] formatInput(String input) {
     	int coord[] = new int[2];
         String inputSplit[] = input.split("\\,\\s*");
@@ -72,9 +86,12 @@
         return coord;
     }
 
-    
+    /**
+     * prompts the user to replay the game on completion and loops main method 
+     * @param ocean
+     */
     static void requestReplay(Ocean ocean) {
-    	
+    	//TODO run main instead of runGame
         String replayGame;
         boolean validResponse = true;
 
@@ -97,6 +114,10 @@
         
     }
     
+    /**
+     * runs game with sequential hits for use in testing only
+     * @param ocean in which to run the game
+     */
     static void testRunGame(Ocean ocean) {
         
         boolean shot = false;
@@ -113,7 +134,7 @@
 		                    System.out.println("You just sunk a "+ ocean.getShipAt(i, j).getShipType());
 		                } else System.out.println("Hit");
 		            } else System.out.println("Miss");
-		            //ocean.print(); 
+		            ocean.print(); 
         		}
         	}
         } while (!(ocean.isGameOver()));

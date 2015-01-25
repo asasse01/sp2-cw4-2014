@@ -22,6 +22,11 @@ public class Ocean {
 
     }
     
+    /**
+     * fills ocean board with ships of type emptySea
+     * @param ships board to fill with emptySea
+     * @return filled board
+     */
     Ship[][] fillWithEmptySea(Ship[][] ships) {
         EmptySea e = new EmptySea();
 
@@ -35,6 +40,9 @@ public class Ocean {
     	
     }
 
+    /**
+     * places ships randomly across game board
+     */
     void placeAllShipsRandomly() {
 		int row;
 		int column;
@@ -58,6 +66,11 @@ public class Ocean {
     	}
     }
     
+    /**
+     * generates full fleet for use on standard 10x10 board
+     * @param fleet array to fill with ships
+     * @return full array of ships
+     */
     Ship[] createFleet(Ship[] fleet) {
     	fleet[0] = new Battleship();
     	fleet[1] = new Cruiser();
@@ -72,6 +85,12 @@ public class Ocean {
     	return fleet;
     }
 
+    /**
+     * check whether single point is occupied
+     * @param row
+     * @param column
+     * @return whether or not point is occupied
+     */
     boolean isOccupied(int row, int column) {
     	boolean occupied = false;
     	if (!(row < 0 || column < 0 || row >= BOARDLENGTH || column >= BOARDLENGTH)) {
@@ -84,6 +103,12 @@ public class Ocean {
     	return occupied;
     }
 
+    /**
+     * marks part of the ship as hit, and returns true, otherwise false
+     * @param row
+     * @param column
+     * @return whether or not ship has been hit
+     */
     boolean shootAt(int row, int column) {
     	boolean shot = false;
     	Ship target;
@@ -100,6 +125,9 @@ public class Ocean {
         return shot;
     }
 
+    /**
+     * prints board for user
+     */
     void print() {
     	System.out.println("  0 1 2 3 4 5 6 7 8 9");
     	// prints column numbers
@@ -114,8 +142,10 @@ public class Ocean {
 		}
     }
     
+    /**
+     * prints board with location and type of ship, for testing only
+     */
     void testPrint() {
-    	// prints location and type of ship. For testing only
     	System.out.println("  0 1 2 3 4 5 6 7 8 9");
     	// prints column numbers
     	for(int i = 0; i < BOARDLENGTH; i++) {
