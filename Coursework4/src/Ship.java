@@ -12,67 +12,30 @@ public class Ship {
 
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
         boolean ok = true;
-//    	TODO refactor loops
-//        // checks whether ship goes off board - vertically
-//        if (row < 0 || row+this.length-1 > ocean.getShipArray()[column].length) {
-//        	// TODO refactor ocean getmax
-//        	ok = false;
-//        }
-//        
-//        // checks whether ship goes off board - horizontally
-//        if (column < 0 || column+this.length-1 > ocean.getShipArray().length) {
-//        	ok = false;
-//        }
+        int[] limits;
         
+        // sets perimeter limits to avoid duplication of loops
         if(horizontal) {
-            // checks whether ship goes off board - vertically
-            if (row < 0 || row >= ocean.getShipArray()[column].length) {
-            	// TODO refactor ocean getmax
-            	ok = false;
-            }
-            
-            // checks whether ship goes off board - horizontally
-            if (column < 0 || column+this.length-1 >= ocean.getShipArray().length) {
-            	ok = false;
-            }
-            
-        	//check bow & stern
-        	if(ocean.isOccupied(row, column-1) || ocean.isOccupied(row, column+this.length+1)) {
-        		ok = false; 
-        	}
-        	
-            for(int j = column; j < this.length; j++) {
-            	// checks overlap with any other ship & adjacent sides
-                if (ocean.isOccupied(row, j)|| ocean.isOccupied(row-1, j) || ocean.isOccupied(row+1, j)) {
-                    ok = false;
-                }
-
-            }
-        } else {
-        	
-            // checks whether ship goes off board - vertically
-            if (row < 0 || row+this.length-1 >= ocean.getShipArray()[column].length) {
-            	// TODO refactor ocean getmax
-            	ok = false;
-            }
-            
-            // checks whether ship goes off board - horizontally
-            if (column < 0 || column >= ocean.getShipArray().length) {
-            	ok = false;
-            }
-            
-        	//check bow & stern
-        	if(ocean.isOccupied(row-1, column) || ocean.isOccupied(row+this.length+1, column)) {
-        		ok = false; 
-        	}
-        	
-        	for(int i = row; i < this.length; i++) {
-        		// checks overlap with any other ship & adjacent sides
-	            if (ocean.isOccupied(i, column) || ocean.isOccupied(i, column-1) || ocean.isOccupied(i, column+1))  {
-	                ok = false;
-	            }
+        	limits = new int[]{0, (this.length-1), 3, (this.length+1)};
+        } else limits = new int[]{(this.length-1), 0, (this.length+1), 3};
+        
+    	// checks whether ship goes off board top/bottom 
+        if (row < 0 || row+limits[0] >= ocean.getMax())
+        	ok = false;
+        
+        // checks whether ship goes off board sides
+        if (column < 0 || column+limits[1] >= ocean.getMax())
+        	ok = false;
+        
+        // checks overlap & perimeter
+        for(int i = row-1; i < row+limits[2]; i++) {
+        	for(int j = column-1; j < column+limits[3]; j++) {
+        		if(ocean.isOccupied(i, j)) {
+        			ok = false; 
+        		}
         	}
         }
+        
         return ok;
     }
 
@@ -94,23 +57,17 @@ public class Ship {
     public boolean shootAt(int row, int column) {
         boolean shot = false;
         if (!this.isSunk()) {
-        	for (int i = 0; i < this.length; i++) {
-        		if (this.isHorizontal()) {
-	        		if (this.bowRow == row) {
-	            		if (this.bowColumn+i == column) {
-	            			this.hit[i] = true;
-	            			shot = true;
-	            		}
-	        		}
-            	} else if (this.bowColumn == column) {
-            		if (this.bowRow+i == row) {
-            			this.hit[i] = true;
-            			shot = true;
-            		}
-            	}
+        	if ((this.isHorizontal() && this.bowRow == row) || this.bowColumn == column) {
+        		//checks for collinearity
+        		for (int i = 0; i < this.length; i++) {
+        			if ((this.isHorizontal() && this.bowColumn+i == column) || this.bowRow+i == row) {
+        				//checks length of ship
+        				this.hit[i] = true;
+        				shot = true;
+        			} 
+        		}
         	}
         }
-
         return shot;
     }
 
@@ -128,7 +85,7 @@ public class Ship {
     	String string = ".";
     	if (this.isSunk()) {
 			string = "x";
-		} else for(int i = 0; i < length; i++) {
+		} else for(int i = 0; i < this.length; i++) {
     		 if (this.hit[i]) {
     			string = "S";
     		}

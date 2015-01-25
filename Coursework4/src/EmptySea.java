@@ -15,5 +15,9 @@ public class EmptySea extends Ship {
     public @Override boolean isSunk() {
         return false;
     }
+    
+    public @Override String getShipType() {
+        return " ";
+    }
 
 }

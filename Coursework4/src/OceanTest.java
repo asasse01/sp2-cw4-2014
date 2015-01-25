@@ -14,14 +14,14 @@ public class OceanTest {
 	public void testPlaceAllShipsRandomly() {
 
 		Ocean ocean = new Ocean();
-		int emptySeaCount = (ocean.ships.length)*(ocean.ships[0].length); 
+		int emptySeaCount = (ocean.getMax())*(ocean.getMax()); 
 		
 		// tests number of empty sea units in a 10 x 10 board
 		assertEquals(100, emptySeaCount);
 		
 		ocean.placeAllShipsRandomly();
-		for(int i = 0; i < ocean.ships.length; i++) {
-			for(int j = 0; j < ocean.ships.length; j++) {
+		for(int i = 0; i < ocean.getMax(); i++) {
+			for(int j = 0; j < ocean.getMax(); j++) {
 				if (!(ocean.ships[i][j] instanceof EmptySea)) {
 					emptySeaCount--;
 				}
@@ -29,7 +29,7 @@ public class OceanTest {
 		}
 
 		// tests number once fleet discounted
-		// FIXME sometimes failing with 81 or 82 returned
+		ocean.testPrint();
 		assertEquals(80, emptySeaCount);
 		
 	}
