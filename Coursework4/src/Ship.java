@@ -12,51 +12,30 @@ public class Ship {
 
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
         boolean ok = true;
+        int[] limits;
         
+        // sets perimeter limits to avoid duplication of loops
         if(horizontal) {
-        	//TODO refactor 
-        	
-            // checks whether ship goes off board - vertically
-            if (row < 0 || row >= ocean.getMax()) {
-            	ok = false;
-            }
-            
-            // checks whether ship goes off board - horizontally
-            if (column < 0 || column+this.length-1 >= ocean.getMax()) {
-            	ok = false;
-            }
-            
-            // checks overlap & perimeter
-            for(int i = row-1; i < row+3; i++) {
-            	for(int j = column-1; j < column+this.length+1; j++) {
-            		if(ocean.isOccupied(i, j)) {
-            			ok = false; 
-            		}
-            	}
-            }
-
-        } else {
-        	
-            // checks whether ship goes off board - vertically
-            if (row < 0 || row+this.length-1 >= ocean.getMax()) {
-            	ok = false;
-            }
-            
-            // checks whether ship goes off board - horizontally
-            if (column < 0 || column >= ocean.getMax()) {
-            	ok = false;
-            }
-            
-            // checks overlap & perimeter
-            for(int i = row-1; i < row+this.length+1; i++) {
-            	for(int j = column-1; j < column+3; j++) {
-            		if(ocean.isOccupied(i, j)) {
-            			ok = false; 
-            		}
-            	}
-            }
-
+        	limits = new int[]{0, (this.length-1), 3, (this.length+1)};
+        } else limits = new int[]{(this.length-1), 0, (this.length+1), 3};
+        
+    	// checks whether ship goes off board top/bottom 
+        if (row < 0 || row+limits[0] >= ocean.getMax())
+        	ok = false;
+        
+        // checks whether ship goes off board sides
+        if (column < 0 || column+limits[1] >= ocean.getMax())
+        	ok = false;
+        
+        // checks overlap & perimeter
+        for(int i = row-1; i < row+limits[2]; i++) {
+        	for(int j = column-1; j < column+limits[3]; j++) {
+        		if(ocean.isOccupied(i, j)) {
+        			ok = false; 
+        		}
+        	}
         }
+        
         return ok;
     }
 
