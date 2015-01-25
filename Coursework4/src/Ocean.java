@@ -138,5 +138,8 @@ public class Ocean {
         return ships[x][y];
     }
 
+    int getMax() {
+        return BOARDLENGTH;
+    }
 
 }

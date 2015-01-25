@@ -12,27 +12,15 @@ public class Ship {
 
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
         boolean ok = true;
-//    	TODO refactor loops
-//        // checks whether ship goes off board - vertically
-//        if (row < 0 || row+this.length-1 > ocean.getShipArray()[column].length) {
-//        	// TODO refactor ocean getmax
-//        	ok = false;
-//        }
-//        
-//        // checks whether ship goes off board - horizontally
-//        if (column < 0 || column+this.length-1 > ocean.getShipArray().length) {
-//        	ok = false;
-//        }
         
         if(horizontal) {
             // checks whether ship goes off board - vertically
-            if (row < 0 || row >= ocean.getShipArray()[column].length) {
-            	// TODO refactor ocean getmax
+            if (row < 0 || row >= ocean.getMax()) {
             	ok = false;
             }
             
             // checks whether ship goes off board - horizontally
-            if (column < 0 || column+this.length-1 >= ocean.getShipArray().length) {
+            if (column < 0 || column+this.length-1 >= ocean.getMax()) {
             	ok = false;
             }
             
@@ -51,13 +39,13 @@ public class Ship {
         } else {
         	
             // checks whether ship goes off board - vertically
-            if (row < 0 || row+this.length-1 >= ocean.getShipArray()[column].length) {
+            if (row < 0 || row+this.length-1 >= ocean.getMax()) {
             	// TODO refactor ocean getmax
             	ok = false;
             }
             
             // checks whether ship goes off board - horizontally
-            if (column < 0 || column >= ocean.getShipArray().length) {
+            if (column < 0 || column >= ocean.getMax()) {
             	ok = false;
             }
             
