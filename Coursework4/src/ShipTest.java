@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -24,11 +22,15 @@ public class ShipTest {
 
         // method calls should return false
         assertEquals(false, d.okToPlaceShipAt(3, 9, true, ocean));
-//        assertEquals(false, e.okToPlaceShipAt(10, 11, true, ocean));
-        // TODO write exceptions
+
         b.placeShipAt(3, 4, true, ocean);
         assertEquals(false, s.okToPlaceShipAt(3, 6, true, ocean));
         assertEquals(false, s.okToPlaceShipAt(3, 5, true, ocean));
+        
+        c.placeShipAt(0, 1, false, ocean);
+        assertEquals(false, s.okToPlaceShipAt(1, 1, true, ocean));
+        assertEquals(false, s.okToPlaceShipAt(1, 2, true, ocean));
+
     }
 
     @Test

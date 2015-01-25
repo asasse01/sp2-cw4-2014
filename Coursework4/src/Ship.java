@@ -14,6 +14,8 @@ public class Ship {
         boolean ok = true;
         
         if(horizontal) {
+        	//TODO refactor 
+        	
             // checks whether ship goes off board - vertically
             if (row < 0 || row >= ocean.getMax()) {
             	ok = false;
@@ -24,23 +26,19 @@ public class Ship {
             	ok = false;
             }
             
-        	//check bow & stern
-        	if(ocean.isOccupied(row, column-1) || ocean.isOccupied(row, column+this.length+1)) {
-        		ok = false; 
-        	}
-        	
-            for(int j = column; j < this.length; j++) {
-            	// checks overlap with any other ship & adjacent sides
-                if (ocean.isOccupied(row, j)|| ocean.isOccupied(row-1, j) || ocean.isOccupied(row+1, j)) {
-                    ok = false;
-                }
-
+            // checks overlap & perimeter
+            for(int i = row-1; i < row+3; i++) {
+            	for(int j = column-1; j < column+this.length+1; j++) {
+            		if(ocean.isOccupied(i, j)) {
+            			ok = false; 
+            		}
+            	}
             }
+
         } else {
         	
             // checks whether ship goes off board - vertically
             if (row < 0 || row+this.length-1 >= ocean.getMax()) {
-            	// TODO refactor ocean getmax
             	ok = false;
             }
             
@@ -49,17 +47,15 @@ public class Ship {
             	ok = false;
             }
             
-        	//check bow & stern
-        	if(ocean.isOccupied(row-1, column) || ocean.isOccupied(row+this.length+1, column)) {
-        		ok = false; 
-        	}
-        	
-        	for(int i = row; i < this.length; i++) {
-        		// checks overlap with any other ship & adjacent sides
-	            if (ocean.isOccupied(i, column) || ocean.isOccupied(i, column-1) || ocean.isOccupied(i, column+1))  {
-	                ok = false;
-	            }
-        	}
+            // checks overlap & perimeter
+            for(int i = row-1; i < row+this.length+1; i++) {
+            	for(int j = column-1; j < column+3; j++) {
+            		if(ocean.isOccupied(i, j)) {
+            			ok = false; 
+            		}
+            	}
+            }
+
         }
         return ok;
     }
