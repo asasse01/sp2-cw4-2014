@@ -116,7 +116,7 @@ public class Ship {
     	String string = ".";
     	if (this.isSunk()) {
 			string = "x";
-		} else for(int i = 0; i < length; i++) {
+		} else for(int i = 0; i < this.length; i++) {
     		 if (this.hit[i]) {
     			string = "S";
     		}
