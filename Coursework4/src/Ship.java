@@ -57,23 +57,17 @@ public class Ship {
     public boolean shootAt(int row, int column) {
         boolean shot = false;
         if (!this.isSunk()) {
-        	for (int i = 0; i < this.length; i++) {
-        		if (this.isHorizontal()) {
-	        		if (this.bowRow == row) {
-	            		if (this.bowColumn+i == column) {
-	            			this.hit[i] = true;
-	            			shot = true;
-	            		}
-	        		}
-            	} else if (this.bowColumn == column) {
-            		if (this.bowRow+i == row) {
-            			this.hit[i] = true;
-            			shot = true;
-            		}
-            	}
+        	if ((this.isHorizontal() && this.bowRow == row) || this.bowColumn == column) {
+        		//checks for collinearity
+        		for (int i = 0; i < this.length; i++) {
+        			if ((this.isHorizontal() && this.bowColumn+i == column) || this.bowRow+i == row) {
+        				//checks length of ship
+        				this.hit[i] = true;
+        				shot = true;
+        			} 
+        		}
         	}
         }
-
         return shot;
     }
 
