@@ -10,11 +10,9 @@
 
     public static void main(String[] args) {        
         
-        Ocean ocean = new Ocean();
-        ocean.placeAllShipsRandomly();
-        
-        runGame(ocean);
-        requestReplay(ocean);
+        do {
+        	runGame();
+        } while(replayRequested());
         
         IN.close();
        
@@ -24,7 +22,9 @@
      * runs Battleship game, recording hit and sunk ships until game completion
      * @param ocean in which to run the game
      */
-    static void runGame(Ocean ocean) {
+    static void runGame() {
+    	Ocean ocean = new Ocean();
+    	ocean.placeAllShipsRandomly();
         
         boolean shot = false;
         int x;
@@ -90,10 +90,10 @@
      * prompts the user to replay the game on completion and loops main method 
      * @param ocean
      */
-    static void requestReplay(Ocean ocean) {
-    	//TODO run main instead of runGame
+    static boolean replayRequested() {
         String replayGame;
         boolean validResponse = true;
+        boolean replay = false;
 
         do {
             System.out.println("Would you like to play again? Y/N");
@@ -101,7 +101,7 @@
             switch(replayGame) {
             case("Y"):
             	validResponse = true;
-            	runGame(ocean);
+            	replay = true;
             case("N"):
             	validResponse = true;
             	System.out.println("Thanks for playing Battleship!");
@@ -112,13 +112,16 @@
             }
         } while (!(validResponse));
         
+        return replay;
     }
     
     /**
      * runs game with sequential hits for use in testing only
      * @param ocean in which to run the game
      */
-    static void testRunGame(Ocean ocean) {
+    static void testRunGame() {
+    	Ocean ocean = new Ocean();
+    	ocean.placeAllShipsRandomly();
         
         boolean shot = false;
         
