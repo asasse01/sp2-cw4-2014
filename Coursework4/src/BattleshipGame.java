@@ -15,7 +15,7 @@
     public static void main(String[] args) {        
         
         do {
-        	testRunGame();
+        	runGame();
         } while(replayRequested());
         
         IN.close();
