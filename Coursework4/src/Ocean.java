@@ -117,14 +117,14 @@ public class Ocean {
     	boolean shot = false;
     	Ship target = ships[row][column];
     	shotsFired++;
-    	shot = target.shootAt(row, column);
-    	if(shot) {
-	    	hitCount++;
-	    	if(target.isSunk()) {
-	        	shipsSunk++;
-	        }
-    	}
-        	
+        if (this.isOccupied(row, column) && !(target.isSunk())) {
+        	shot = target.shootAt(row, column);
+        	hitCount++;
+        	if(target.isSunk()) {
+            	shipsSunk++;
+            }
+        } 
+        
         return shot;
     }
 
