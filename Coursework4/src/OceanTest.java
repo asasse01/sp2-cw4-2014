@@ -33,7 +33,6 @@ public class OceanTest {
 		}
 
 		// tests number once fleet discounted
-		ocean.testPrint();
 		assertEquals(80, emptySeaCount);
 		
 	}
