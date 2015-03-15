@@ -24,13 +24,12 @@
     
     /**
      * runs Battleship game, recording hit and sunk ships until game completion
-     * @param ocean in which to run the game
      */
     static void runGame() {
     	Ocean ocean = new Ocean();
     	ocean.placeAllShipsRandomly();
         
-        boolean shot = false;
+        boolean shot;
         int x;
         int y;
         
@@ -92,11 +91,11 @@
 
     /**
      * prompts the user to replay the game on completion and loops main method 
-     * @param ocean
+     * @return replay
      */
     static boolean replayRequested() {
         String replayGame;
-        boolean validResponse = true;
+        boolean validResponse;
         boolean replay = false;
 
         do {
@@ -121,7 +120,6 @@
     
     /**
      * runs game with sequential hits for use in testing only
-     * @param ocean in which to run the game
      */
     static void testRunGame() {
     	Ocean ocean = new Ocean();
