@@ -1,6 +1,10 @@
 /**
  * @author Abby Sassel
- * @since 22/12/14.
+ * @since 22/12/14
+ * 
+ * SP2 Coursework 4
+ * - Single player battleship game
+ * - The computer places the ships, and the human attempts to sink them.
  */
  
  import java.util.Scanner;
@@ -11,7 +15,7 @@
     public static void main(String[] args) {        
         
         do {
-        	runGame();
+        	testRunGame();
         } while(replayRequested());
         
         IN.close();

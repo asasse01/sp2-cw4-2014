@@ -1,6 +1,12 @@
 /**
- * Created by abby on 22/12/14.
+ * @author Abby Sassel
+ * @since 22/12/14
+ * 
+ * SP2 Coursework 4
+ * - Single player battleship game
+ * - The computer places the ships, and the human attempts to sink them.
  */
+
 public class Ship {
 
     int bowRow;
@@ -10,6 +16,13 @@ public class Ship {
     String shipType;
     boolean[] hit;
 
+    /**
+     * returns true if it is okay to put a ship of this length with its bow in this location
+     * @param row stern row
+     * @param column stern column
+     * @param horizontal ship orientation
+     * @ocean ocean to check
+     */
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
         boolean ok = true;
         int[] limits;
@@ -39,6 +52,13 @@ public class Ship {
         return ok;
     }
 
+    /**
+     * Puts the ship in the ocean. 
+     * @param row game board y coordinate
+     * @param column game board x coordinate
+     * @param horizontal ship orientation
+     * @ocean ocean to place ship in
+     */
     public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
         setBowRow(row);
         setBowColumn(column);
@@ -54,15 +74,21 @@ public class Ship {
         }
     }
 
+    /**
+     * marks part of the ship as hit, and returns true, otherwise false
+     * @param row game board y coordinate
+     * @param column game board x coordinate
+     * @return
+     */
     public boolean shootAt(int row, int column) {
         boolean shot = false;
         
         if (!this.isSunk()) {
+        	//checks for collinearity
         	if (this.bowRow == row || this.bowColumn == column) {
-        		//checks for collinearity
+				//checks length of ship for a hit, depending on orientation
         		for (int i = 0; i < this.length; i++) {
         			if ((this.isHorizontal() && this.bowColumn+i == column) || this.bowRow+i == row) {
-        				//checks length of ship
         				this.hit[i] = true;
         				shot = true;
         			} 
@@ -72,6 +98,10 @@ public class Ship {
         return shot;
     }
 
+    /**
+     * return true if every part of the ship has been hit, false otherwise
+     * @return sunk ship status
+     */
     public boolean isSunk() {
         boolean sunk = true;
         for (int i = 0; i < this.length; i++) {
@@ -82,17 +112,21 @@ public class Ship {
         return sunk;
     }
     
+    /**
+     * returns a single-character String to use in the Ocean’s print method
+     * @param string
+     */
     public @Override String toString() {
+    	/* nb: "Use ’S’ to indicate a location fired upon and hit a ship" functionality
+    	 * not included, as the requested implementation of ship hit status means that
+    	 * the toString method would reveal the whole ship if any part of it is hit. 
+    	 */
+    	
     	String string;
     	
     	if (this.isSunk()) {
 			string = "x";
 		} else string = ".";
-    	
-    	/** nb: "Use ’S’ to indicate a location fired upon and hit a ship" functionality
-    	 * not included, as the requested implementation of ship hit status means that
-    	 * the toString method would reveal the whole ship if any part of it is hit. 
-    	 */
     	
     	return string;
     }

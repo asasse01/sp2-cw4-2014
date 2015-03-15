@@ -1,9 +1,13 @@
-import java.util.Random;
-
 /**
- * Created by abby on 22/12/14.
+ * @author Abby Sassel
+ * @since 22/12/14
+ * 
+ * SP2 Coursework 4
+ * - Single player battleship game
+ * - The computer places the ships, and the human attempts to sink them.
  */
 
+import java.util.Random;
 
 public class Ocean {
 	private static final int BOARDLENGTH = 10; // ocean length. Assumes board is square
@@ -146,14 +150,14 @@ public class Ocean {
      * prints board with location and type of ship, for testing only
      */
     void testPrint() {
-    	System.out.println("  0 1 2 3 4 5 6 7 8 9");
     	// prints column numbers
+    	System.out.println("  0 1 2 3 4 5 6 7 8 9");
+		// prints row numbers
     	for(int i = 0; i < BOARDLENGTH; i++) {
     		System.out.print(i);
-    		// prints row numbers
+			// prints ship string
 			for(int j = 0; j < BOARDLENGTH; j++) {
 				System.out.print( " " + ships[i][j].getShipType().substring(0, 1));
-				// prints ship string
 			}
 			System.out.println();
 		}
