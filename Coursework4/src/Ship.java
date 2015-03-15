@@ -13,7 +13,6 @@ public class Ship {
     int bowColumn;
     int length;
     boolean horizontal = true;
-    String shipType;
     boolean[] hit;
 
     /**
@@ -114,7 +113,7 @@ public class Ship {
     
     /**
      * returns a single-character String to use in the Ocean’s print method
-     * @param string
+     * @return string
      */
     public @Override String toString() {
     	/* nb: "Use ’S’ to indicate a location fired upon and hit a ship" functionality
@@ -153,10 +152,6 @@ public class Ship {
 
     public void setHorizontal(boolean horizontal) {
         this.horizontal = horizontal;
-    }
-
-    public int getLength() {
-        return length;
     }
 
     public String getShipType() {
