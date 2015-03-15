@@ -56,8 +56,9 @@ public class Ship {
 
     public boolean shootAt(int row, int column) {
         boolean shot = false;
+        
         if (!this.isSunk()) {
-        	if ((this.isHorizontal() && this.bowRow == row) || this.bowColumn == column) {
+        	if (this.bowRow == row || this.bowColumn == column) {
         		//checks for collinearity
         		for (int i = 0; i < this.length; i++) {
         			if ((this.isHorizontal() && this.bowColumn+i == column) || this.bowRow+i == row) {
@@ -82,14 +83,16 @@ public class Ship {
     }
     
     public @Override String toString() {
-    	String string = ".";
+    	String string;
+    	
     	if (this.isSunk()) {
 			string = "x";
-		} else for(int i = 0; i < this.length; i++) {
-    		 if (this.hit[i]) {
-    			string = "S";
-    		}
-    	}
+		} else string = ".";
+    	
+    	/** nb: "Use ’S’ to indicate a location fired upon and hit a ship" functionality
+    	 * not included, as the requested implementation of ship hit status means that
+    	 * the toString method would reveal the whole ship if any part of it is hit. 
+    	 */
     	
     	return string;
     }
