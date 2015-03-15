@@ -55,14 +55,14 @@ public class Ocean {
 		Ship[] fleet = new Ship[10];
 		fleet = createFleet(fleet);
 
+		// generates random horizontal value
     	for(Ship ship : fleet) {
     		horizontal = rand.nextBoolean();
-    		// generates random horizontal value
     		
+    		// generates random coordinate values
     		do {
     			row = rand.nextInt(BOARDLENGTH);
     			column = rand.nextInt(BOARDLENGTH);
-        		// generates random coordinate values
     			
     		} while (!(ship.okToPlaceShipAt(row, column, horizontal, this)));
     		
@@ -97,8 +97,8 @@ public class Ocean {
      */
     boolean isOccupied(int row, int column) {
     	boolean occupied = false;
+		// if the area is not off the board - for checking ship perimeter in okToPlaceAt
     	if (!(row < 0 || column < 0 || row >= BOARDLENGTH || column >= BOARDLENGTH)) {
-    		// if the area is not off the board - for checking ship perimeter in okToPlaceAt
 	    	if (!(ships[row][column] instanceof EmptySea)) {
 	    		occupied = true;
 	    	}
@@ -108,24 +108,23 @@ public class Ocean {
     }
 
     /**
-     * marks part of the ship as hit, and returns true, otherwise false
+     * returns shot status and updates shots fired, hits and sunk ships numbers
      * @param row
      * @param column
      * @return whether or not ship has been hit
      */
     boolean shootAt(int row, int column) {
     	boolean shot = false;
-    	Ship target;
+    	Ship target = ships[row][column];
     	shotsFired++;
-        if (this.isOccupied(row, column) && !(this.ships[row][column].isSunk())) {
-        	target = ships[row][column];
-        	shot = target.shootAt(row, column);
-        	hitCount++;
-        	if(this.ships[row][column].isSunk()) {
-            	shipsSunk++;
-            }
-        } 
-        
+    	shot = target.shootAt(row, column);
+    	if(shot) {
+	    	hitCount++;
+	    	if(target.isSunk()) {
+	        	shipsSunk++;
+	        }
+    	}
+        	
         return shot;
     }
 
@@ -133,14 +132,14 @@ public class Ocean {
      * prints board for user
      */
     void print() {
-    	System.out.println("  0 1 2 3 4 5 6 7 8 9");
     	// prints column numbers
+    	System.out.println("  0 1 2 3 4 5 6 7 8 9");
+		// prints row numbers
     	for(int i = 0; i < BOARDLENGTH; i++) {
     		System.out.print(i);
-    		// prints row numbers
+			// prints ship string
 			for(int j = 0; j < BOARDLENGTH; j++) {
 				System.out.print( " " + ships[i][j].toString());
-				// prints ship string
 			}
 			System.out.println();
 		}
